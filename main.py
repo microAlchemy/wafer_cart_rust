@@ -6,7 +6,7 @@ pid = PID(kp=0.6, ki=0, kd=0.00)
 
 BASE = 3
 MAX_PWM = 5
-DT = 0.02
+DT = 0.0002
 DURATION = 10
 
 # BLACK_LEFT edge position (mm)
