@@ -2,12 +2,12 @@ from pid import PID
 from hardware import initialize, read_IR_sensors, set_motors, cleanup, stop
 import time
 
-pid = PID(kp=0.6, ki=0, kd=0.00)
+pid = PID(kp=0.6, ki=0, kd=0.075)
 
 BASE = 3
 MAX_PWM = 5
-DT = 0.0002
-DURATION = 10
+DT = 0.002
+DURATION = 15
 
 # BLACK_LEFT edge position (mm)
 EDGE_POSITIONS = {
