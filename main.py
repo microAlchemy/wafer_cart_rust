@@ -4,8 +4,8 @@ import time
 
 pid = PID(kp=0.6, ki=0, kd=0.075)
 
-BASE = 3
-MAX_PWM = 5
+BASE = 10
+MAX_PWM = 12
 DT = 0.002
 DURATION = 15
 
@@ -43,15 +43,13 @@ if __name__ == "__main__":
             # Positive edge position means strafe right
             error = position
             u = pid.update(error, dt)
-            u = max(-3, min(3, u))
+            u = max(-MAX_PWM, min(MAX_PWM, u))
 
             # Differential mixing
             FL = BASE + u
             FR = BASE - u
-            RL = BASE + u
-            RR = BASE - u
 
-            set_motors(FL, FR, RL, RR)
+            set_motors(FL, FR)
             time.sleep(max(0, DT - (time.monotonic() - cycle)))
 
     finally:

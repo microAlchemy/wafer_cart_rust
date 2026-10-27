@@ -1,0 +1,17 @@
+nodes:
+  - id: server-demo
+    path: ../target/debug/planning-demo
+    inputs:
+      tick: dora/timer/millis/1000
+      telemetry: cart/telemetry
+      command_status: cart/command_status
+    outputs:
+      - planning_command
+  - id: cart
+    path: ../target/debug/telemetry-node
+    inputs:
+      planning_command: server-demo/planning_command
+      tick: dora/timer/millis/100
+    outputs:
+      - telemetry
+      - command_status

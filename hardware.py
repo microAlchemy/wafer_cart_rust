@@ -14,7 +14,7 @@ def initialize():
     guard.acquire_ownership("three_file_pid")
 
     try:
-        config = RobotConfig(motor=MotorConfig(max_speed=5))
+        config = RobotConfig(motor=MotorConfig(max_speed=140))
         robot = Robot.connected(
             config,
             stop_check=guard.stop_requested,
@@ -28,12 +28,13 @@ def initialize():
 def read_IR_sensors():
     return robot.read_line_sensors().normalized
 
-def set_motors(FL, FR, RL, RR):
-    limit = 5
-    speeds = tuple(
-        max(-limit, min(limit, round(v)))
-        for v in (FL, RL, FR, RR)
-    )
+def set_motors(FL, FR):
+    limit = 255
+
+    left = max(-limit, min(limit, round(FL)))
+    right = max(-limit, min(limit, round(FR)))
+
+    speeds = (left, 0, right, 0)
     robot.drive_wheels(speeds)
 
 def stop():
