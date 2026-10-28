@@ -2,6 +2,17 @@
 
 A simulation-first Rust library and dora-rs telemetry node alongside the original Python controller. Python files are unchanged. No physical device is opened or moved.
 
+## Goal status
+
+| Goal | What is implemented | Still needed |
+| --- | --- | --- |
+| Dora telemetry node for the server | `telemetry-node` publishes a telemetry snapshot every 100 ms and command acknowledgements through Dora. `server-demo` exercises the dataflow locally. | Connect the real server and run a live Dora dataflow. |
+| Read upstream global planning commands | Versioned JSON goal, pause, resume, and stop commands are validated and acknowledged. Goals update planning state without moving motors. | Define the real server transport and authentication; add route execution only when intended. |
+| Low level camera, motor, and IR library | Rust traits, validated data types, deterministic simulators, motor bounds, and a simulated watchdog and emergency stop. | Implement and calibrate physical device adapters and an independent hardware watchdog. |
+| Metrics, reporting, logging, diagnostics, tests | Telemetry includes counters, latency, and device health; JSON logs use `RUST_LOG`; simulated diagnostics and tests cover the protocol and Dora message exchange. | Verify on real hardware and in a live server deployment. |
+
+This completes the **Rust foundation** for the four goals, not production integration with a server or physical cart.
+
 ## Run locally
 
 ```sh
